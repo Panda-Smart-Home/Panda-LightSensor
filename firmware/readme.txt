@@ -1,6 +1,6 @@
 固件版本 NodeMCU 2.2.1
 包含模块：
-    crypto, file, gpio, net, node, sjson, tmr, uart, wifi
+    file, gpio, net, node, sjson, tmr, uart, ucg, wifi
 烧录命令：
 python esptool.py -p /dev/ttyUSB0 write_flash -fm dio 0x00000 xxx.bin
 清除命令：

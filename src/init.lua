@@ -8,11 +8,10 @@ require("sta")
 require("udp")
 require("webserver")
 
--- set dht11 pin
-dht_pin = 4
-dht_info = {}
-dht_info.temp = nil
-dht_info.humi = nil
+-- set light sensor pin
+sensor_pin = 4
+gpio.mode(4, gpio.INPUT)
+isLight = nil
 
 -- set wifi mode
 wifi.setmode(wifi.STATIONAP)
@@ -24,7 +23,7 @@ node.egc.setmode(node.egc.ALWAYS, 4096)
 tmr_tab = {}
 tmr_tab.ap     = tmr.create()
 tmr_tab.sta    = tmr.create()
-tmr_tab.dht    = tmr.create()
+tmr_tab.sensor = tmr.create()
 tmr_tab.udp    = tmr.create()
 tmr_tab.cookie = tmr.create()
 
@@ -45,19 +44,14 @@ tmr_tab.sta:alarm(
 )
 
 -- get temperature and humidity
-tmr_tab.dht:alarm(
-    1000,
+tmr_tab.sensor:alarm(
+    500,
     tmr.ALARM_AUTO,
     function()
-        status, temp, humi, temp_dec, humi_dec = dht.read11(dht_pin)
-        if status == dht.OK then
-            print("DHT Temperature:"..temp..";".."Humidity:"..humi)
-            dht_info.temp = temp
-            dht_info.humi = humi
-        elseif status == dht.ERROR_CHECKSUM then
-            print( "DHT Checksum error." )
-        elseif status == dht.ERROR_TIMEOUT then
-            print( "DHT timed out." )
+        if gpio.read(4) == 0 then
+            isLight = true;
+        else
+            isLight = false;
         end
     end
 )

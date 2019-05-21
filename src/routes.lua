@@ -3,7 +3,12 @@ webserver.clearRoutes()
 webserver.addRoute("GET", "/", true,
     function (headers, body, conn)
         local config = helper.getConfig();
-        local dht = "温度：" .. dht_info.temp .. "℃<br>湿度：" .. dht_info.humi .. "％"
+        local sensor_info = "感光状态："
+        if isLight then
+            sensor_info = sensor_info .. "有光"
+        else
+            sensor_info = sensor_info .. "无光"
+        end
         local hidden = ""
         if config.ap.hidden then
             hidden = "checked"
@@ -13,7 +18,7 @@ webserver.addRoute("GET", "/", true,
             config.id,
             config.name,
             config.chip,
-            dht,
+            sensor_info,
             config.ap.ssid,
             hidden,
             sta_ip,

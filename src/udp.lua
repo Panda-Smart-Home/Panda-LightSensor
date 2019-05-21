@@ -35,9 +35,11 @@ local function onReceive(s, playload, port, ip)
         response = "online"
 
     elseif data == "status" then
-
-        response = dht_info.temp .. "," .. dht_info.humi
-
+        if isLight then
+            response = 'onLight'
+        else
+            response = 'offLight'
+        end
     else
         return nil
     end

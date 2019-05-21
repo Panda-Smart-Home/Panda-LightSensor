@@ -1,18 +1,18 @@
 {
-    "id": "2",
-    "name": "Panda Sensirion",
-    "type": "sensirion",
+    "id": "3",
+    "name": "Panda Light Sensor",
+    "type": "lightSensor",
     "chip": "ESP 8266",
     "username": "panda",
     "password": "123456",
     "ap": {
-        "ssid": "panda-sensirion",
+        "ssid": "PandaLightSensor",
         "pwd" : "201511611426",
         "auth": 3,
         "hidden": false
     },
     "sta": {
-        "ssid": "325",
-        "pwd": "haihua325wudi"
+        "ssid": "zane",
+        "pwd": "pi31415926"
     }
 }
