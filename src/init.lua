@@ -9,8 +9,8 @@ require("udp")
 require("webserver")
 
 -- set light sensor pin
-sensor_pin = 4
-gpio.mode(4, gpio.INPUT)
+sensor_pin = 3
+gpio.mode(sensor_pin, gpio.INPUT)
 isLight = nil
 
 -- set wifi mode
@@ -48,7 +48,7 @@ tmr_tab.sensor:alarm(
     500,
     tmr.ALARM_AUTO,
     function()
-        if gpio.read(4) == 0 then
+        if gpio.read(sensor_pin) == 0 then
             isLight = true;
         else
             isLight = false;
